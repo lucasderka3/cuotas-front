@@ -43,20 +43,35 @@ export const useClientesStore = defineStore('clientes', () => {
         }
     }
 
-    const crearCliente = async(cliente: Cliente) => {
-         loading.value = true;
-         error.value = null
-         success.value = false
+    const crearCliente = async (cliente: Cliente) => {
+        loading.value = true
+        error.value = null
+        success.value = false
+
         try {
-            const res = await useRepositories().clientes.newCliente(cliente);
-            success.value = true;
-            return res;
-        }catch(err){
-            error.value = err?.data?.message || 'Error crear el cliente';
+            const { data, error: fetchError } = await useRepositories().clientes.newCliente(cliente)
+
+            if (fetchError.value) {
+                // Si el backend devuelve error, lo procesamos aquí
+                if (fetchError.value.statusCode === 400) {
+                    error.value = fetchError.value.data?.message || 'Ya existe un cliente con este DNI'
+                } else {
+                    error.value = fetchError.value.data?.message || 'Error al crear el cliente'
+                }
+                return null
+            }
+
+            // Éxito real
+            success.value = true
+            return data.value
+        } catch (err: any) {
+            error.value = err?.data?.message || 'Error inesperado al crear el cliente'
+            return null
         } finally {
-             loading.value = false
+            loading.value = false
         }
     }
+
 
     return {
         clientes,
