@@ -6,14 +6,14 @@ import { useClientesStore } from '~/store/ClienteStore'
 
 const clientesStore = useClientesStore()
 
-// Campos del formulario
+
 const nombre = ref('')
 const apellido = ref('')
 const dni = ref('')
 const email = ref('')
 const telefono = ref('')
 
-// Reglas de validación
+
 const rules = {
   nombre: { required },
   apellido: { required },
@@ -25,7 +25,7 @@ const rules = {
 const formData = { nombre, apellido, dni, email, telefono }
 const v$ = useVuelidate(rules, formData)
 
-// Dialogs
+
 const dialogExito = ref(false)
 const dialogError = computed({
   get: () => !!clientesStore.error,
@@ -34,7 +34,7 @@ const dialogError = computed({
   }
 })
 
-// Enviar formulario
+
 const enviarFormulario = async () => {
   const esValido = await v$.value.$validate()
   if (!esValido) return
@@ -49,7 +49,6 @@ const enviarFormulario = async () => {
 
   if (clientesStore.success) {
     dialogExito.value = true
-    // Reset campos
     nombre.value = ''
     apellido.value = ''
     dni.value = ''
@@ -111,7 +110,6 @@ const enviarFormulario = async () => {
       </v-btn>
     </v-form>
 
-    <!-- Dialog éxito -->
     <v-dialog v-model="dialogExito" max-width="400">
       <v-card>
         <v-card-title class="text-h6">✅ Cliente creado</v-card-title>
@@ -123,7 +121,6 @@ const enviarFormulario = async () => {
       </v-card>
     </v-dialog>
 
-    <!-- Dialog error -->
     <v-dialog v-model="dialogError" max-width="400">
       <v-card>
         <v-card-title class="text-h6 text-error">Error</v-card-title>

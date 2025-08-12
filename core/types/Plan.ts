@@ -1,8 +1,8 @@
 export interface Plan {
-    id: number;
+    id?: number;
     nombre: string;
-    descripcion: string;
-    precio: string;
+    descripcion?: string;
+    precio: number;
     frecuencia_pago: string;
-    activo: boolean;
+    activo?: boolean;
 }

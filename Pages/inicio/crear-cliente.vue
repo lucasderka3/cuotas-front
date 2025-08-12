@@ -6,6 +6,7 @@ definePageMeta({
 </script>
 
 <template>
+  <title>Crear Cliente</title>
   <NuevoCliente/>
 </template>
 
