@@ -9,6 +9,25 @@ export const usePlanesStore = defineStore('planes', () => {
     const success = ref(false);
 
 
+    const fetchPlanes = async () => {
+        loading.value = true;
+        error.value = null;
+
+        try {
+            const { data, error: fetchError} = await useRepositories().planes.index();
+
+            if(fetchError.value) {
+                throw new Error(fetchError.value.message || "Error al obtener los planes");
+            }
+
+            planes.value = data.value || [];
+        }catch (err: any) {
+            error.value = err.message;
+        }finally {
+            loading.value = false;
+        }
+    }
+
 
     const crearPlan = async(plan: Plan) => {
         loading.value = true;
@@ -43,6 +62,7 @@ export const usePlanesStore = defineStore('planes', () => {
         error,
         success,
         planes,
+        fetchPlanes,
         crearPlan,
     }
 })

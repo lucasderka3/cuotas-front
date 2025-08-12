@@ -7,7 +7,7 @@ const planesStore = usePlanesStore();
 
 const nombre = ref('');
 const descripcion = ref('');
-const precio = ref<number | null>(null);
+const precio = ref<number>(null);
 const frecuenciaPago = ref('');
 
 const dialogFormulario = ref(false);
@@ -30,7 +30,7 @@ const enviarFormulario = async () => {
   await planesStore.crearPlan({
     nombre: nombre.value,
     descripcion: descripcion.value,
-    precio: precio.value,
+    precio: Number(precio.value),
     frecuencia_pago: frecuenciaPago.value
   })
 
