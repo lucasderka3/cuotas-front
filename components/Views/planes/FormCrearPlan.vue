@@ -41,6 +41,7 @@ const enviarFormulario = async () => {
     precio.value
     frecuenciaPago.value = ''
     v$.value.$reset()
+    dialogFormulario.value = false
   }
 
 }

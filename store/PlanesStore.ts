@@ -54,6 +54,28 @@ export const usePlanesStore = defineStore('planes', () => {
 
     }
 
+    const updatePlan = async (id: number, plan: Plan) => {
+        loading.value = true
+        error.value = null
+        success.value = false
+
+        try {
+            const { data, error: fetchError } = await useRepositories().planes.updatePlan(id, plan)
+
+            if (fetchError.value) {
+                throw new Error(fetchError.value.data?.message || 'Error al actualizar el plan')
+            }
+
+            success.value = true
+            return data.value
+        } catch (err: any) {
+            error.value = err?.message || 'Error inesperado al actualizar el plan'
+            return null
+        } finally {
+            loading.value = false
+        }
+    }
+
 
 
 
@@ -64,5 +86,6 @@ export const usePlanesStore = defineStore('planes', () => {
         planes,
         fetchPlanes,
         crearPlan,
+        updatePlan,
     }
 })

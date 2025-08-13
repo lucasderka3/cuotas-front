@@ -16,4 +16,11 @@ export default class PlanesRepository extends RepositoryBase{
             body: plan
         })
     }
+
+    updatePlan(id:number, plan: Plan){
+        return useFetchStatic('/api/v1/planes/'+id,{
+            method: "PATCH",
+            body: plan
+        })
+    }
 }
