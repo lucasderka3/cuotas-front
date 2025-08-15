@@ -62,7 +62,7 @@ const enviarFormulario = async () => {
 
     <v-dialog v-model="dialogFormulario" max-width="500px">
       <v-card>
-        <v-card-title class="text-h5 text-center">Crear nuevo plan</v-card-title>
+        <v-card-title>Crear nuevo plan</v-card-title>
         <v-card-text>
           <v-form @submit.prevent="enviarFormulario">
             <v-text-field
