@@ -53,7 +53,7 @@ const enviarFormulario = async () => {
 
     <v-btn
       color="primary"
-      class="mb-4"
+      block
       @click="dialogFormulario = true"
       prepend-icon="mdi mdi-plus-circle"
     >

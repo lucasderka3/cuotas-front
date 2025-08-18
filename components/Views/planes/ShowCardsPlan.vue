@@ -85,8 +85,8 @@ const saveChanges = async () => {
           />
         </v-card-text>
         <v-card-actions>
-          <v-btn text @click="dialog = false">Cancelar</v-btn>
-          <v-btn color="primary" @click="saveChanges">Guardar</v-btn>
+          <v-btn color="error" text @click="dialog = false" variant="text" append-icon="mdi mdi-cancel">Cancelar</v-btn>
+          <v-btn color="success" @click="saveChanges" variant="elevated" append-icon="mdi mdi-content-save-check-outline">Guardar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

@@ -9,8 +9,8 @@ definePageMeta({
 
 <template>
   <title>Planes</title>
-  <ShowCardsPlan/>
   <FormCrearPlan/>
+  <ShowCardsPlan/>
 </template>
 
 <style scoped>

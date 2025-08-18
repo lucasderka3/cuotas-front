@@ -8,9 +8,13 @@ import {usePlanesStore} from "~/store/PlanesStore";
 const cuotasStore = useCuotasStore();
 const planesStore = usePlanesStore();
 
+//Dialogs
 const dialogNuevaCuota = ref(false);
 const dialogDateInicio = ref(false);
 const dialogDateFin = ref(false);
+const dialogExito = ref(false);
+
+//Rutas
 const route = useRoute();
 const idCliente = Number(route.params.id);
 
@@ -48,6 +52,7 @@ const enviarFormulario = async () => {
   })
 
   if(cuotasStore.success){
+    dialogExito.value = true;
     planId.value = Number('');
     fechaInicio.value = '';
     fechaFin.value = '';
@@ -161,6 +166,18 @@ await useAsyncData('planes', () => planesStore.fetchPlanes())
       </v-card-text>
     </v-card>
   </v-dialog>
+
+  <v-dialog v-model="dialogExito" max-width="400">
+    <v-card>
+      <v-card-title class="text-h6">✅ Cuota creada</v-card-title>
+      <v-card-text>La nueva cuota fue asignada correctamente</v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn color="primary" @click="dialogExito = false">Aceptar</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+
 </template>
 
 <style scoped>
