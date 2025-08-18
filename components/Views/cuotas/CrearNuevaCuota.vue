@@ -2,11 +2,15 @@
 import {required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 import {useCuotasStore} from "~/store/CuotasStore";
+import {usePlanesStore} from "~/store/PlanesStore";
 
 //Store
 const cuotasStore = useCuotasStore();
+const planesStore = usePlanesStore();
 
 const dialogNuevaCuota = ref(false);
+const dialogDateInicio = ref(false);
+const dialogDateFin = ref(false);
 const route = useRoute();
 const idCliente = Number(route.params.id);
 
@@ -53,7 +57,7 @@ const enviarFormulario = async () => {
   }
 
 }
-
+await useAsyncData('planes', () => planesStore.fetchPlanes())
 </script>
 
 <template>
@@ -69,40 +73,90 @@ const enviarFormulario = async () => {
       <v-card-title class="text-h5 text-center">Asignar una nueva cuota</v-card-title>
       <v-card-text>
         <v-form @submit.prevent="enviarFormulario">
-          <v-text-field
-            v-model="planId"
-            label="Plan"
-            required
-          />
-          <v-text-field
-            v-model="fechaInicio"
-            label="Fecha de inicio"
-            required
-          />
-          <v-text-field
-            v-model="fechaFin"
-            label="Fecha de fin"
-            required
-          />
-          <v-text-field
-            v-model="monto"
-            label="Monto"
-            required
-          />
-          <v-text-field
-            v-model="observaciones"
-            label="Observaciones"
-          />
+          <v-row dense>
+            <v-col cols="12" sm="6">
+              <v-select
+                  v-model="planId"
+                  :items="planesStore.planes"
+                  item-title="nombre"
+                  item-value="id"
+                  label="Plan"
+                  required
+              />
+            </v-col>
+
+            <v-col cols="12" sm="6">
+              <v-text-field
+                  v-model="monto"
+                  label="Monto"
+                  type="number"
+                  prepend-inner-icon="mdi-currency-usd"
+                  required
+              />
+            </v-col>
+
+            <v-col cols="12" sm="6">
+              <v-menu
+                  v-model="dialogDateInicio"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  max-width="290px"
+                  min-width="290px"
+              >
+                <template #activator="{ props }">
+                  <v-text-field
+                      v-model="fechaInicio"
+                      label="Fecha inicio"
+                      readonly
+                      v-bind="props"
+                      prepend-inner-icon="mdi-calendar"
+                  />
+                </template>
+                <v-date-picker v-model="fechaInicio" />
+              </v-menu>
+            </v-col>
+
+            <v-col cols="12" sm="6">
+              <v-menu
+                  v-model="dialogDateFin"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  max-width="290px"
+                  min-width="290px"
+              >
+                <template #activator="{ props }">
+                  <v-text-field
+                      v-model="fechaFin"
+                      label="Fecha fin"
+                      readonly
+                      v-bind="props"
+                      prepend-inner-icon="mdi-calendar"
+                  />
+                </template>
+                <v-date-picker v-model="fechaFin" />
+              </v-menu>
+            </v-col>
+
+            <v-col cols="12">
+              <v-textarea
+                  v-model="observaciones"
+                  label="Observaciones"
+                  auto-grow
+                  rows="2"
+                  prepend-inner-icon="mdi-note-text"
+              />
+            </v-col>
+          </v-row>
 
           <v-btn
-            type="submit"
-            :loading="cuotasStore.loading"
-            color="primary"
-            class="mt-4"
+              type="submit"
+              :loading="cuotasStore.loading"
+              color="primary"
+              block
+              class="mt-4"
           >
             Crear cuota
           </v-btn>
-
         </v-form>
       </v-card-text>
     </v-card>

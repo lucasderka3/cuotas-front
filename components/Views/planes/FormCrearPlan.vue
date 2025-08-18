@@ -99,6 +99,7 @@ const enviarFormulario = async () => {
                 :loading="planesStore.loading"
                 color="primary"
                 class="mt-4"
+                block
             >
               Crear
             </v-btn>
