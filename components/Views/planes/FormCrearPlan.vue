@@ -41,6 +41,7 @@ const enviarFormulario = async () => {
     precio.value
     frecuenciaPago.value = ''
     v$.value.$reset()
+    useAsyncData('planes', () => planesStore.fetchPlanes())
     dialogFormulario.value = false
   }
 
@@ -61,8 +62,14 @@ const enviarFormulario = async () => {
     </v-btn>
 
     <v-dialog v-model="dialogFormulario" max-width="500px">
-      <v-card>
-        <v-card-title>Crear nuevo plan</v-card-title>
+      <v-card rounded="xl" elevation="8">
+
+        <v-card-title class="text-h5 text-center font-weight-bold">
+          📚 Crear nuevo plan
+        </v-card-title>
+
+        <v-divider></v-divider>
+
         <v-card-text>
           <v-form @submit.prevent="enviarFormulario">
             <v-text-field
@@ -70,6 +77,8 @@ const enviarFormulario = async () => {
                 label="Nombre del Plan"
                 :disabled="planesStore.loading"
                 required
+                variant="outlined"
+                density="comfortable"
             />
 
             <v-text-field
@@ -77,6 +86,8 @@ const enviarFormulario = async () => {
                 label="Descripción"
                 :disabled="planesStore.loading"
                 required
+                variant="outlined"
+                density="comfortable"
             />
 
             <v-text-field
@@ -85,6 +96,8 @@ const enviarFormulario = async () => {
                 type="number"
                 :disabled="planesStore.loading"
                 required
+                variant="outlined"
+                density="comfortable"
             />
 
             <v-text-field
@@ -92,17 +105,29 @@ const enviarFormulario = async () => {
                 label="Frecuencia de Pago"
                 :disabled="planesStore.loading"
                 required
+                variant="outlined"
+                density="comfortable"
             />
 
-            <v-btn
-                type="submit"
-                :loading="planesStore.loading"
-                color="primary"
-                class="mt-4"
-                block
-            >
-              Crear
-            </v-btn>
+            <v-card-actions class="justify-end">
+              <v-btn
+                variant="text"
+                color="grey"
+                @click="dialogFormulario = false"
+              >
+                Cancelar
+              </v-btn>
+
+              <v-btn
+                  type="submit"
+                  :loading="planesStore.loading"
+                  color="primary"
+                  variant="flat"
+                  class="px-6"
+              >
+                Crear
+              </v-btn>
+            </v-card-actions>
           </v-form>
         </v-card-text>
       </v-card>

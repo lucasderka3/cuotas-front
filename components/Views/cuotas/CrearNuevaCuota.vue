@@ -3,8 +3,10 @@ import {required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 import {useCuotasStore} from "~/store/CuotasStore";
 import {usePlanesStore} from "~/store/PlanesStore";
+import {useClientesStore} from "~/store/ClienteStore";
 
 //Store
+const clienteStore = useClientesStore();
 const cuotasStore = useCuotasStore();
 const planesStore = usePlanesStore();
 
@@ -58,6 +60,7 @@ const enviarFormulario = async () => {
     fechaFin.value = '';
     monto.value = Number('');
     observaciones.value = '';
+    await useAsyncData('cuotas', () =>  clienteStore.fetchCuotasByCliente(idCliente));
     dialogNuevaCuota.value = false;
   }
 
@@ -68,14 +71,22 @@ await useAsyncData('planes', () => planesStore.fetchPlanes())
 <template>
   <v-btn
     icon
+    variant="outlined"
+    color="primary"
     @click="dialogNuevaCuota = true"
   >
     <v-icon>mdi mdi-tag-plus</v-icon>
   </v-btn>
 
   <v-dialog v-model="dialogNuevaCuota" max-width="600px">
-    <v-card>
-      <v-card-title class="text-h5 text-center">Asignar una nueva cuota</v-card-title>
+    <v-card rounded="xl" elevation="8">
+
+      <v-card-title class="text-h5 text-center font-weight-bold">
+        📅 Asignar una nueva cuota
+      </v-card-title>
+
+      <v-divider></v-divider>
+
       <v-card-text>
         <v-form @submit.prevent="enviarFormulario">
           <v-row dense>
@@ -87,6 +98,8 @@ await useAsyncData('planes', () => planesStore.fetchPlanes())
                   item-value="id"
                   label="Plan"
                   required
+                  variant="outlined"
+                  density="comfortable"
               />
             </v-col>
 
@@ -97,6 +110,8 @@ await useAsyncData('planes', () => planesStore.fetchPlanes())
                   type="number"
                   prepend-inner-icon="mdi-currency-usd"
                   required
+                  variant="outlined"
+                  density="comfortable"
               />
             </v-col>
 
@@ -115,6 +130,8 @@ await useAsyncData('planes', () => planesStore.fetchPlanes())
                       readonly
                       v-bind="props"
                       prepend-inner-icon="mdi-calendar"
+                      variant="outlined"
+                      density="comfortable"
                   />
                 </template>
                 <v-date-picker v-model="fechaInicio" />
@@ -136,6 +153,8 @@ await useAsyncData('planes', () => planesStore.fetchPlanes())
                       readonly
                       v-bind="props"
                       prepend-inner-icon="mdi-calendar"
+                      variant="outlined"
+                      density="comfortable"
                   />
                 </template>
                 <v-date-picker v-model="fechaFin" />
@@ -149,6 +168,8 @@ await useAsyncData('planes', () => planesStore.fetchPlanes())
                   auto-grow
                   rows="2"
                   prepend-inner-icon="mdi-note-text"
+                  variant="outlined"
+                  density="comfortable"
               />
             </v-col>
           </v-row>
@@ -158,7 +179,8 @@ await useAsyncData('planes', () => planesStore.fetchPlanes())
               :loading="cuotasStore.loading"
               color="primary"
               block
-              class="mt-4"
+              class="px-6"
+              variant="flat"
           >
             Crear cuota
           </v-btn>

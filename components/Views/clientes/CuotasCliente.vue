@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {Cuota} from "~/core/types/Cuota";
 import CrearNuevaCuota from "~/components/Views/cuotas/CrearNuevaCuota.vue";
+import FormNuevoPago from "~/components/Views/pagos/FormNuevoPago.vue";
+
 
 defineProps<{
   cuotas: Cuota[]
@@ -32,14 +34,20 @@ defineProps<{
               sm="6"
               md="4"
           >
-            <v-card outlined>
-              <v-card-title class="text-subtitle-1">
-                Monto: ${{ cuota.monto }}
+            <v-card
+              :color="cuota.pagada ? 'green-darken-3' : 'grey-darken-3'"
+            >
+              <FormNuevoPago v-if="cuota.pagada === false" :cuota-id="cuota.id"/>
+
+              <v-card-title>
+                Plan: {{ cuota.plan.nombre }}
               </v-card-title>
               <v-card-text>
+                <div><strong>Monto:</strong> ${{cuota.monto}}</div>
                 <div><strong>Desde:</strong> {{ cuota.fechaInicio }}</div>
                 <div><strong>Hasta:</strong> {{ cuota.fechaFin }}</div>
                 <div><strong>Estado:</strong> {{ cuota.pagada ? 'Pagada' : 'Pendiente' }}</div>
+                <div><strong>Fecha de Pago:</strong> {{cuota.fechaPago}}</div>
                 <div><strong>Observaciones:</strong> {{ cuota.observaciones || '—' }}</div>
               </v-card-text>
             </v-card>
