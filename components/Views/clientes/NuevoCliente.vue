@@ -6,6 +6,7 @@ import { useClientesStore } from '~/store/ClienteStore'
 
 const clientesStore = useClientesStore()
 
+const dialogFormulario = ref(false);
 
 const nombre = ref('')
 const apellido = ref('')
@@ -60,7 +61,25 @@ const enviarFormulario = async () => {
 </script>
 
 <template>
-  <v-container>
+<v-container>
+    <v-btn
+      block
+      @click="dialogFormulario = true"
+      prepend-icon="mdi mdi-account-plus"
+    >
+      Nuevo cliente
+    </v-btn>
+
+  <v-dialog v-model="dialogFormulario" max-width="600px">
+   <v-card rounded="xl" elevation="8">
+
+     <v-card-title class="text-h5 text-center font-weight-bold">
+       🆕 Crear un nuevo cliente
+     </v-card-title>
+
+     <v-divider></v-divider>
+
+     <v-card-text>
     <v-form @submit.prevent="enviarFormulario">
       <v-text-field
           v-model="nombre"
@@ -68,6 +87,9 @@ const enviarFormulario = async () => {
           :error-messages="v$.nombre.$errors.map(e => e.$message)"
           :disabled="clientesStore.loading"
           required
+          clearable
+          variant="outlined"
+          density="comfortable"
       />
 
       <v-text-field
@@ -76,6 +98,9 @@ const enviarFormulario = async () => {
           :error-messages="v$.apellido.$errors.map(e => e.$message)"
           :disabled="clientesStore.loading"
           required
+          clearable
+          variant="outlined"
+          density="comfortable"
       />
 
       <v-text-field
@@ -84,20 +109,30 @@ const enviarFormulario = async () => {
           :error-messages="v$.dni.$errors.map(e => e.$message)"
           :disabled="clientesStore.loading"
           required
+          clearable
+          variant="outlined"
+          density="comfortable"
       />
 
       <v-text-field
           v-model="email"
           label="Email"
+          type="email"
           :error-messages="v$.email.$errors.map(e => e.$message)"
           :disabled="clientesStore.loading"
           required
+          clearable
+          variant="outlined"
+          density="comfortable"
       />
 
       <v-text-field
           v-model="telefono"
           label="Teléfono"
           :disabled="clientesStore.loading"
+          clearable
+          variant="outlined"
+          density="comfortable"
       />
 
       <v-btn
@@ -105,10 +140,16 @@ const enviarFormulario = async () => {
           :loading="clientesStore.loading"
           color="primary"
           class="mt-4"
+          block
+          variant="flat"
       >
         Crear Cliente
       </v-btn>
     </v-form>
+     </v-card-text>
+    </v-card>
+  </v-dialog>
+
 
     <v-dialog v-model="dialogExito" max-width="400">
       <v-card>
@@ -131,7 +172,7 @@ const enviarFormulario = async () => {
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-container>
+</v-container>
 </template>
 
 <style scoped>

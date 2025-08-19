@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import MostrarClientes from "~/components/Views/clientes/MostrarClientes.vue";
+import NuevoCliente from "~/components/Views/clientes/NuevoCliente.vue";
 
 definePageMeta({
   layout: 'administracion'
@@ -8,7 +9,10 @@ definePageMeta({
 
 <template>
   <title>Clientes</title>
-  <MostrarClientes/>
+    <NuevoCliente/>
+
+    <MostrarClientes/>
+
 </template>
 
 <style scoped>
