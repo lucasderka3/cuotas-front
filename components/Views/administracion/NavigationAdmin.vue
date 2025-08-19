@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-import NuevoCliente from "~/components/Views/clientes/NuevoCliente.vue";
 </script>
 
 <template>
