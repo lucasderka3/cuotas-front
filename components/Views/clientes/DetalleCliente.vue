@@ -6,26 +6,18 @@ defineProps<{
   cliente: Cliente | null
 }>();
 
-const backToClientes = () => {
-  navigateTo(`/inicio/clientes/`);
-}
+
 
 
 </script>
 
 <template>
-  <v-container>
     <v-card>
-      <v-btn @click="backToClientes">Volver</v-btn>
-      <v-card-title>Detalle del cliente</v-card-title>
-      <v-card-subtitle><strong>Nombre:</strong> {{cliente.nombre}}</v-card-subtitle>
-      <v-card-subtitle>Apellido: {{cliente.apellido}}</v-card-subtitle>
-
-      <v-card-text>Email: {{cliente.email}}</v-card-text>
-      <v-card-text>Telefono: {{cliente.telefono}}</v-card-text>
-
+      <v-card-title>Nombre: {{cliente.nombre}}</v-card-title>
+      <v-card-title>Apellido: {{cliente.apellido}}</v-card-title>
+      <v-card-title>Email: {{cliente.email}}</v-card-title>
+      <v-card-title>Telefono: {{cliente.telefono}}</v-card-title>
     </v-card>
-  </v-container>
 </template>
 
 <style scoped>

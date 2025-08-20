@@ -70,12 +70,13 @@ await useAsyncData('planes', () => planesStore.fetchPlanes())
 
 <template>
   <v-btn
-    icon
+    prepend-icon="mdi mdi-tag-plus"
     variant="outlined"
     color="primary"
+
     @click="dialogNuevaCuota = true"
   >
-    <v-icon>mdi mdi-tag-plus</v-icon>
+    Nueva cuota
   </v-btn>
 
   <v-dialog v-model="dialogNuevaCuota" max-width="600px">
