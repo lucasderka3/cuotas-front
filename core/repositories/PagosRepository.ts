@@ -4,6 +4,10 @@ import {useFetchStatic} from "~/Composables/http/useFetchStatic";
 
 export default class PagosRepository extends RepositoryBase{
 
+    index(){
+        return useFetchStatic('/api/v1/pagos')
+    }
+
     newPago(pago: Pago) {
         return useFetchStatic(`/api/v1/pagos`, {
             method: 'POST',

@@ -1,11 +1,30 @@
-import {Pago} from "~/core/types/Pago";
+import {FetchPago, Pago} from "~/core/types/Pago";
 import useRepositories from "~/Composables/useRepositories";
 
 
 export const usePagosStore = defineStore('pagos', () => {
+    const pagos = ref<FetchPago[]>([]);
     const loading = ref(false);
     const error = ref<string | null>(null);
     const success = ref(false);
+
+    const fetchPagos = async () => {
+        loading.value = true;
+
+        try {
+            const {data, error: fetchError} = await useRepositories().pagos.index()
+
+            if (fetchError.value) {
+                throw new Error(fetchError.value.message || 'Error al obtener los pagos')
+            }
+
+            pagos.value = data.value || [];
+        }catch(err) {
+            error.value = err.message
+        }finally {
+            loading.value = false;
+        }
+    }
 
 
     const crearPago = async (pago: Pago) => {
@@ -36,6 +55,8 @@ export const usePagosStore = defineStore('pagos', () => {
         loading,
         error,
         success,
+        pagos,
+        fetchPagos,
         crearPago,
     }
 

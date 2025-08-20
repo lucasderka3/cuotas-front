@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import DetallePagos from "~/components/Views/pagos/DetallePagos.vue";
+
 definePageMeta({
   layout: 'administracion',
 })
@@ -6,7 +8,7 @@ definePageMeta({
 
 <template>
   <v-container>
-    <v-card>asd</v-card>
+    <DetallePagos/>
   </v-container>
 </template>
 

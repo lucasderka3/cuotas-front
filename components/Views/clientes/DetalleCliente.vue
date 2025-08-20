@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {Cuota} from "~/core/types/Cuota";
 import {Cliente} from "~/core/types/Cliente";
 
 defineProps<{
