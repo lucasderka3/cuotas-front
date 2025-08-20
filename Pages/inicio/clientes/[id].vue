@@ -44,7 +44,7 @@ const backToClientes = () => {
 
     <v-row dense>
 
-      <v-col cols="12" md="5">
+      <v-col cols="12" md="6">
         <v-card elevation="2">
           <v-card-title class="text-h6 text-center font-weight-bold">Información del Cliente</v-card-title>
           <v-divider></v-divider>
@@ -55,7 +55,7 @@ const backToClientes = () => {
       </v-col>
 
 
-      <v-col cols="12" md="7">
+      <v-col cols="12" md="6">
         <v-card elevation="2">
           <v-card-title class="text-h6 text-center font-weight-bold">Cuotas</v-card-title>
           <v-divider></v-divider>
