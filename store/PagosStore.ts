@@ -18,7 +18,9 @@ export const usePagosStore = defineStore('pagos', () => {
                 throw new Error(fetchError.value.message || 'Error al obtener los pagos')
             }
 
-            pagos.value = data.value || [];
+            pagos.value = data.value.sort(
+                (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime()
+            ) || [];
         }catch(err) {
             error.value = err.message
         }finally {

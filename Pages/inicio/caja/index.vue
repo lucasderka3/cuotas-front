@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DetallePagos from "~/components/Views/pagos/DetallePagos.vue";
+import TableObtenerPagos from "~/components/Views/pagos/TableObtenerPagos.vue";
 
 definePageMeta({
   layout: 'administracion',
@@ -8,7 +8,7 @@ definePageMeta({
 
 <template>
   <v-container>
-    <DetallePagos/>
+    <TableObtenerPagos/>
   </v-container>
 </template>
 
