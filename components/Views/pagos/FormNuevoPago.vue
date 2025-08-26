@@ -2,6 +2,7 @@
 import {required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 import {usePagosStore} from "~/store/PagosStore";
+import {useAsyncData} from "#app";
 
 const props = defineProps<{
   cuotaId: number
@@ -41,6 +42,7 @@ const enviarFormulario = async () => {
     metodoPago.value = '';
     observaciones.value = '';
     dialogFormulario.value = false;
+    await useAsyncData('pagos', () => pagosStore.fetchPagos())
   }
 }
 </script>

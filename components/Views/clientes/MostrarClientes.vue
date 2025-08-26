@@ -4,7 +4,6 @@ import {useAsyncData} from "#app";
 
 
 const store = useClientesStore();
-await useAsyncData('clientes', () => store.fetchClientes())
 
 
 const headers = [
@@ -17,6 +16,8 @@ const headers = [
 const goToDetalle = (id: number) => {
   navigateTo(`/inicio/clientes/${id}`);
 }
+
+await useAsyncData('clientes', () => store.fetchClientes())
 
 </script>
 

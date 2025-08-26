@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email as emailValidator } from '@vuelidate/validators'
 import { useClientesStore } from '~/store/ClienteStore'
+import {useAsyncData} from "#app";
 
 const clientesStore = useClientesStore()
 
@@ -49,13 +50,15 @@ const enviarFormulario = async () => {
   })
 
   if (clientesStore.success) {
-    dialogExito.value = true
+    dialogFormulario.value = false
     nombre.value = ''
     apellido.value = ''
     dni.value = ''
     email.value = ''
     telefono.value = ''
     v$.value.$reset()
+    dialogExito.value = true
+    await useAsyncData('clientes', () => clientesStore.fetchClientes())
   }
 }
 </script>

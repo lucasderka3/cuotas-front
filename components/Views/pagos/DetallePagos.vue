@@ -14,7 +14,7 @@ function formatDateTime(dateString: string) {
   });
 }
 
-useAsyncData('pagos', () => pagosStore.fetchPagos())
+await useAsyncData('pagos', () => pagosStore.fetchPagos())
 </script>
 
 <template>
