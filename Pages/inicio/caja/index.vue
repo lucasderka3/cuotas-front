@@ -7,6 +7,7 @@ definePageMeta({
 </script>
 
 <template>
+  <title>Caja</title>
   <v-container>
     <TableObtenerPagos/>
   </v-container>

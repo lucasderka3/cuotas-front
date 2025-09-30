@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import {useAuthStore} from "~/store/authStore";
+
+const authStore = useAuthStore()
+
+function logout(){
+  authStore.logout()
+
+}
 
 </script>
 
@@ -14,6 +22,10 @@
       <v-list-item prepend-icon="mdi mdi-account-multiple" title="Clientes" to="/inicio/clientes"></v-list-item>
       <v-list-item prepend-icon="mdi mdi-dumbbell" title="Planes" to="/inicio/planes"></v-list-item>
       <v-list-item prepend-icon="mdi mdi-sticker" title="Caja" to="/inicio/caja"></v-list-item>
+    </v-list>
+    <v-divider></v-divider>
+    <v-list density="comfortable" nav>
+    <v-list-item prepend-icon="mdi mdi-logout" title="Salir" to="/login" @click="logout"></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>

@@ -2,15 +2,17 @@
 import FormCrearPlan from "~/components/Views/planes/FormCrearPlan.vue";
 import ShowCardsPlan from "~/components/Views/planes/ShowCardsPlan.vue";
 
+
 definePageMeta({
-  layout: 'administracion'
+  layout: 'administracion',
 })
+
 </script>
 
-<template>
+<template >
   <title>Planes</title>
-  <FormCrearPlan/>
-  <ShowCardsPlan/>
+    <FormCrearPlan/>
+    <ShowCardsPlan/>
 </template>
 
 <style scoped>
