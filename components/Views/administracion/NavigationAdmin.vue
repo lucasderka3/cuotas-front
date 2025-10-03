@@ -5,7 +5,6 @@ const authStore = useAuthStore()
 
 function logout(){
   authStore.logout()
-
 }
 
 </script>

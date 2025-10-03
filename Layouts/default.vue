@@ -7,11 +7,9 @@ import Footer from "~/components/Views/Footer.vue";
 
 <template>
   <v-app>
-    <Toolbar/>
     <v-main class="pt-0">
       <NuxtPage/>
     </v-main>
-    <Footer/>
   </v-app>
 </template>
 
